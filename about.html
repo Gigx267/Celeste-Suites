@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Celeste Suites Abuja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #E0E5EC;
+            --text-main: #2C3E50;
+            --text-light: #627485;
+            --accent-red: #FF5A5F;
+            --white: #ffffff;
+            --shadow-extrude: 12px 12px 24px rgba(163,177,198,0.7), -12px -12px 24px rgba(255,255,255,0.9);
+            --shadow-inset: inset 6px 6px 12px rgba(163,177,198,0.5), inset -6px -6px 12px rgba(255,255,255,0.8);
+            --glass-bg: rgba(224, 229, 236, 0.7);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION (Consistent with Home) --- */
+        .header {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1100px; background: var(--glass-bg);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 999px;
+            padding: 10px 30px; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); z-index: 1000;
+        }
+
+        .logo { font-size: 20px; font-weight: 700; color: var(--text-main); text-decoration: none; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 14px; transition: 0.3s; opacity: 0.8; }
+        .nav-link:hover { color: var(--accent-red); opacity: 1; }
+
+        /* --- ABOUT HERO --- */
+        .about-hero {
+            padding: 180px 5% 80px;
+            text-align: center;
+            background: linear-gradient(to bottom, #d1d9e6, var(--bg-main));
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            letter-spacing: -2px;
+            margin-bottom: 20px;
+        }
+
+        /* --- STORY SECTION --- */
+        .content-section {
+            max-width: 1100px;
+            margin: 0 auto 100px;
+            padding: 0 5%;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-image-container {
+            padding: 15px;
+            background: var(--bg-main);
+            border-radius: 40px;
+            box-shadow: var(--shadow-extrude);
+        }
+
+        .story-image-container img {
+            width: 100%;
+            border-radius: 30px;
+            display: block;
+        }
+
+        /* --- VALUES SECTION (BENTO STYLE) --- */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .value-card {
+            background: var(--bg-main);
+            padding: 40px 30px;
+            border-radius: 35px;
+            box-shadow: var(--shadow-extrude);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .value-card i {
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 { margin-bottom: 15px; }
+
+        /* --- FOOTER --- */
+        .footer {
+            background: var(--bg-main);
+            box-shadow: inset 0 15px 30px rgba(163,177,198,0.4);
+            padding: 80px 5% 40px;
+            border-radius: 60px 60px 0 0;
+        }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-column h3 { font-size: 15px; margin-bottom: 25px; text-transform: uppercase; }
+        .footer-link { display: block; color: var(--text-light); text-decoration: none; margin-bottom: 12px; font-size: 14px; transition: 0.2s; }
+        .footer-link:hover { color: var(--accent-red); transform: translateX(5px); }
+
+        @media (max-width: 768px) {
+            .story-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">Celeste Suites Abuja</a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="room.html" class="nav-link">Rooms</a>
+            <a href="about.html" class="nav-link" style="color: var(--accent-red); opacity: 1;">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <div style="width: 38px; height: 38px; background: var(--accent-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+            <i class="fas fa-user" style="font-size: 14px;"></i>
+        </div>
+    </header>
+
+    <section class="about-hero">
+        <h1>Defined by Elegance.</h1>
+        <p style="max-width: 600px; margin: 0 auto; color: var(--text-light); font-size: 1.2rem;">
+            Discover the story behind Gwarinpa’s premier boutique luxury retreat.
+        </p>
+    </section>
+
+    <main class="content-section">
+        <div class="story-grid">
+            <div class="story-image-container">
+                <img src="k (1).jpg" alt="Celeste Interior">
+            </div>
+            <div>
+                <h2 style="font-size: 2rem; margin-bottom: 20px;">The Celeste Philosophy</h2>
+                <p style="margin-bottom: 20px; color: var(--text-light);">
+                    Founded in the heart of Abuja, Celeste Suites was born out of a desire to create a sanctuary that feels less like a hotel and more like a private residence. We believe that true luxury isn't just about gold finishes; it's about the silence of a quiet street, the crisp air of a non-smoking room, and the peace of mind that comes with world-class security.
+                </p>
+                <p style="color: var(--text-light);">
+                    Our curated selection of rooms and studios in Gwarinpa are designed for the modern traveler who seeks refinement, privacy, and the warmth of home.
+                </p>
+            </div>
+        </div>
+
+        <h2 style="text-align: center; margin: 100px 0 40px;">Our Core Values</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <i class="fas fa-leaf"></i>
+                <h3>Wellness First</h3>
+                <p style="font-size: 0.9rem; color: var(--text-light);">Our strict non-smoking policy in all rooms ensures a fresh, healthy environment for every guest.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-fingerprint"></i>
+                <h3>Absolute Privacy</h3>
+                <p style="font-size: 0.9rem; color: var(--text-light);">With biometric security and a discreet team, your stay is as private as it is secure.</p>
+            </div>
+            <div class="value-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Uninterrupted Luxury</h3>
+                <p style="font-size: 0.9rem; color: var(--text-light);">24/7 power and high-speed connectivity mean the world stops only when you want it to.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>Celeste Suites</h3>
+                <p style="font-size: 14px; line-height: 1.6; opacity: 0.8; margin-top: 10px;">
+                    House 15, 14th Road, Off 2nd Avenue, Gwarinpa, Abuja, Nigeria.
+                </p>
+                <p style="font-size: 14px; margin-top: 10px; font-weight: 500;">
+                    <i class="fas fa-phone-alt" style="margin-right: 8px; color: var(--accent-red);"></i> 0901 923 8653
+                </p>
+            </div>
+            <div class="footer-column">
+                <h3>The Experience</h3>
+                <a href="room.html" class="footer-link">Luxury Rooms</a>
+                <a href="room.html" class="footer-link">Studio Suites</a>
+                <a href="room.html" class="footer-link">Amenities</a>
+            </div>
+            <div class="footer-column">
+                <h3>Social</h3>
+                <div style="display: flex; gap: 20px; font-size: 20px; margin-top: 10px;">
+                    <a href="https://www.instagram.com/celeste_suites/" class="footer-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="footer-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 60px; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 30px; font-size: 12px; opacity: 0.6;">
+            © 2026 CELESTE SUITES & APARTMENTS. DEFINED BY ELEGANCE.
+        </div>
+    </footer>
+
+</body>
+</html>
