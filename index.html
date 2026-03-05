@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celeste x Celeste | Premium Living</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #E0E5EC;
+            --text-main: #2C3E50;
+            --text-light: #627485;
+            --accent-red: #FF5A5F;
+            --white: #ffffff;
+            /* Optimized Neumorphic Shadows */
+            --shadow-extrude: 12px 12px 24px rgba(163,177,198,0.7), -12px -12px 24px rgba(255,255,255,0.9);
+            --shadow-inset: inset 6px 6px 12px rgba(163,177,198,0.5), inset -6px -6px 12px rgba(255,255,255,0.8);
+            --glass-bg: rgba(224, 229, 236, 0.7);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 999px;
+            padding: 10px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .nav-links { display: flex; gap: 20px; }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 14px;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
+
+        .nav-link:hover { color: var(--accent-red); opacity: 1; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
+            margin-bottom: 50px;
+            background: #000;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
+            z-index: 2;
+        }
+
+        .hero-card {
+            position: relative;
+            z-index: 3;
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px) saturate(150%);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 50px 30px;
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 650px;
+            margin: 0 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+        }
+
+        /* --- CONTENT GRID --- */
+        .main-content { padding: 0 5% 80px; max-width: 1300px; margin: 0 auto; }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: -80px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .option-card {
+            background: var(--bg-main);
+            border-radius: 35px;
+            padding: 12px;
+            box-shadow: var(--shadow-extrude);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            cursor: pointer;
+            height: 380px;
+            position: relative;
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 15px 15px 35px rgba(163,177,198,0.8);
+        }
+
+        .option-card:active {
+            box-shadow: var(--shadow-inset);
+            transform: translateY(-5px) scale(0.98);
+        }
+
+        .option-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 25px;
+        }
+
+        .option-overlay {
+            position: absolute;
+            inset: 12px;
+            background: linear-gradient(transparent 40%, rgba(0,0,0,0.85));
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+            color: white;
+        }
+
+        /* --- BENTO LOCATIONS --- */
+        .section-title { font-size: 28px; font-weight: 700; margin: 80px 0 40px; text-align: center; color: var(--text-main); }
+
+        .locations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .location-card {
+            background: var(--bg-main);
+            padding: 15px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-extrude);
+            transition: 0.3s ease;
+        }
+
+        .location-card:hover { transform: scale(1.02); }
+
+        .location-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 15px;
+        }
+
+        .location-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; }
+        .property-count { color: var(--text-light); font-size: 0.9rem; font-weight: 400; }
+
+        /* --- FOOTER --- */
+        .footer {
+            background: var(--bg-main);
+            box-shadow: inset 0 15px 30px rgba(163,177,198,0.4);
+            padding: 80px 5% 40px;
+            border-radius: 60px 60px 0 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 { font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-link { 
+            display: block; 
+            color: var(--text-light); 
+            text-decoration: none; 
+            margin-bottom: 12px; 
+            font-size: 14px;
+            transition: 0.2s;
+        }
+        .footer-link:hover { color: var(--accent-red); transform: translateX(5px); }
+
+        @media (max-width: 768px) {
+            .options-grid { grid-template-columns: 1fr; margin-top: 20px; }
+            .header { padding: 10px 20px; width: 95%; }
+            .nav-links { display: none; }
+            .hero { height: 70vh; border-radius: 0 0 40px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo">Celeste Suites Abuja  </a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home </a>
+            <a href="room.html" class="nav-link">Rooms </a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <div style="display: flex; gap: 18px; align-items: center;">
+            <i class="fas fa-search" style="opacity: 0.5; cursor: pointer;"></i>
+            <div style="width: 38px; height: 38px; background: var(--accent-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(255,90,95,0.3);">
+                <i class="fas fa-user" style="font-size: 14px;"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline poster="k (2).jpg" class="hero-video">
+            <source src="bbg.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-card">
+            <h1 class="hero-title">Find Your Sanctuary</h1>
+            <p style="opacity: 0.9; font-weight: 300; font-size: 1.1rem;">Luxury Rooms, Studios & Suites- a boutique luxury retreat located in the Gwarinpa district of Abuja </p>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="options-grid">
+            <div class="option-card">
+                <img src="k (1).jpg" alt="Shortlets" loading="lazy">
+                <div class="option-overlay">
+                    <h2>Hampstead </h2>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">1 bedroom, 2 bathroom</p>
+                </div>
+            </div>
+            <div class="option-card">
+                <img src="yt (2).jpg" alt="Rentals" loading="lazy">
+                <div class="option-overlay">
+                    <h2>Luxury Rentals</h2>
+                    <p style="opacity: 0.8; font-size: 0.9rem;">Long-term homes with curated elegance.</p>
+                </div>
+            </div>
+        </div>
+<section class="main-content">
+    <h2 class="section-title">The Celeste Standard</h2>
+    
+    <div class="locations-grid">
+        <div class="location-card">
+            <div style="height: 220px; background: linear-gradient(135deg, #d1d9e6, #ffffff); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                <i class="fas fa-gem" style="font-size: 3rem; color: var(--accent-red); opacity: 0.8;"></i>
+            </div>
+            <div class="location-info">
+                <div class="location-name">Exclusivity Redefined</div>
+                <div class="property-count" style="line-height: 1.4;">
+                    From our sophisticated Studios to our expansive Suites, every space at Celeste is a masterclass in architectural beauty and interior refinement.
+                </div>
+            </div>
+        </div>
+
+        <div class="location-card">
+            <div style="height: 220px; background: linear-gradient(135deg, #ffffff, #d1d9e6); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                <i class="fas fa-shield-check" style="font-size: 3rem; color: var(--accent-red); opacity: 0.8;"></i>
+            </div>
+            <div class="location-info">
+                <div class="location-name">A Pristine Sanctuary</div>
+                <div class="property-count" style="line-height: 1.4;">
+                    Experience peace of mind with 24/7 power, biometric security, and a strictly <b>non-smoking in the rooms </b> policy to ensure a fresh, premium environment.
+                </div>
+            </div>
+        </div>
+
+        <div class="location-card">
+            <div style="height: 220px; background: linear-gradient(135deg, #e0e5ec, #adb5bd); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                <i class="fas fa-map-location-dot" style="font-size: 3rem; color: var(--accent-red); opacity: 0.8;"></i>
+            </div>
+            <div class="location-info">
+                <div class="location-name">Heart of Gwarinpa</div>
+                <div class="property-count" style="line-height: 1.4;">
+                    Nestled in Abuja's most vibrant hub, we offer the perfect blend of neighborhood charm and easy access to the capital's central business districts.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 50px; padding: 40px; border-radius: 35px; box-shadow: var(--shadow-inset); text-align: center;">
+        <p style="font-size: 1.2rem; font-weight: 300; color: var(--text-main); max-width: 800px; margin: 0 auto; line-height: 1.6;">
+            "At <b>Celeste Suites</b>, our mission is to redefine urban living in Abuja by bridging the gap between <span style="color: var(--accent-red); font-weight: 500;">luxury hospitality</span> and the timeless comfort of <span style="color: var(--accent-red); font-weight: 500;">home</span>."
+        </p>
+        <div style="margin-top: 25px; font-size: 0.9rem; color: var(--text-muted);">
+            <i class="fas fa-map-marker-alt"></i> House 15, 14th Road, off 2nd Avenue, Gwarinpa, Abuja<br>
+            <i class="fas fa-phone"></i> 0901 923 8653
+        </div>
+    </div>
+</section>
+      
+    </main>
+
+   <footer class="footer">
+    <div class="footer-grid">
+        <div class="footer-column">
+            <h3>Celeste Suites</h3>
+            <p style="font-size: 14px; line-height: 1.6; opacity: 0.8; margin-top: 10px;">
+                House 15, 14th Road,<br>
+                Off 2nd Avenue, Gwarinpa,<br>
+                Abuja, Nigeria.
+            </p>
+            <p style="font-size: 14px; margin-top: 10px; font-weight: 500;">
+                <i class="fas fa-phone-alt" style="margin-right: 8px; color: var(--accent-red);"></i> 0901 923 8653
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h3>The Experience</h3>
+            <a href="room.html" class="footer-link">Luxury Rooms</a>
+            <a href="room.html" class="footer-link">Studio Suites</a>
+            <a href="room.html" class="footer-link">Executive Suites</a>
+            <a href="room.html" class="footer-link">Amenities</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Guest Services</h3>
+            <a href="policy.html" class="footer-link">Check-in Policy</a>
+            <a href="policy.html" class="footer-link">Non-Smoking Policy</a>
+            <a href="policy.html" class="footer-link">Privacy & Security</a>
+            <a href="policy.html" class="footer-link">FAQs</a>
+        </div>
+
+        <div class="footer-column">
+            <h3>Connect With Us</h3>
+            <div style="display: flex; gap: 20px; font-size: 20px; margin-top: 10px;">
+                <a href=" https://www.instagram.com/celeste_suites/" class="footer-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href=" https://www.instagram.com/celeste_suites/" class="footer-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/celeste_suites/ " class="footer-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+            <p style="font-size: 12px; margin-top: 20px; opacity: 0.7; font-style: italic;">
+                Where Exclusivity Meets Timeless Comfort.
+            </p>
+        </div>
+    </div>
+
+    <div style="margin-top: 60px; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 30px; font-size: 13px; opacity: 0.6; letter-spacing: 1px;">
+        © 2026 CELESTE SUITES & APARTMENTS. DEFINED BY ELEGANCE.
+    </div>
+</footer> 
+
+</body>
+</html>
