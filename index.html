@@ -1,9 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <audio id="bgMusic" loop>
+        <source src="mm.mp3" type="audio/mpeg">
+        <source src="mm.mp3" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        window.addEventListener('load', function() {
+            const bgMusic = document.getElementById('bgMusic');
+            const playPromise = bgMusic.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay prevented:", error);
+                    createMusicControls();
+                });
+            }
+        });
+        
+        function createMusicControls() {
+            const musicControls = document.createElement('div');
+            musicControls.id = 'music-controls';
+            musicControls.innerHTML = `
+                <button id="playMusicBtn" style="background: var(--accent-red); color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-family: 'Outfit'; font-size: 12px;">▶ Play Music</button>
+            `;
+            musicControls.style.cssText = `
+                position: fixed; bottom: 20px; right: 20px; z-index: 10000;
+                background: rgba(224, 229, 236, 0.9); padding: 10px; border-radius: 30px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1); backdrop-filter: blur(10px);
+            `;
+            document.body.appendChild(musicControls);
+            document.getElementById('playMusicBtn').addEventListener('click', function() {
+                document.getElementById('bgMusic').play();
+                musicControls.style.display = 'none';
+            });
+        }
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Celeste x Celeste | Premium Living</title>
+    <title>Celeste Suites | Luxury Boutique Living Abuja</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -14,10 +51,9 @@
             --text-light: #627485;
             --accent-red: #FF5A5F;
             --white: #ffffff;
-            /* Optimized Neumorphic Shadows */
             --shadow-extrude: 12px 12px 24px rgba(163,177,198,0.7), -12px -12px 24px rgba(255,255,255,0.9);
             --shadow-inset: inset 6px 6px 12px rgba(163,177,198,0.5), inset -6px -6px 12px rgba(255,255,255,0.8);
-            --glass-bg: rgba(224, 229, 236, 0.7);
+            --glass-bg: rgba(224, 229, 236, 0.85);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,216 +68,111 @@
 
         /* --- NAVIGATION --- */
         .header {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1100px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            border-radius: 999px;
-            padding: 10px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            z-index: 1000;
-            transition: all 0.3s ease;
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1100px; background: var(--glass-bg);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 999px;
+            padding: 10px 30px; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); z-index: 1000;
         }
 
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            color: var(--text-main);
-            text-decoration: none;
-            letter-spacing: -1px;
-        }
-
+        .logo { font-size: 20px; font-weight: 700; color: var(--text-main); text-decoration: none; letter-spacing: -1px; }
         .nav-links { display: flex; gap: 20px; }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 500;
-            font-size: 14px;
-            transition: 0.3s;
-            opacity: 0.8;
-        }
-
+        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 14px; transition: 0.3s; opacity: 0.8; }
         .nav-link:hover { color: var(--accent-red); opacity: 1; }
+
+        .menu-toggle {
+            display: none; width: 38px; height: 38px; background: var(--accent-red); 
+            border-radius: 50%; align-items: center; justify-content: center; 
+            color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(255,90,95,0.3);
+        }
 
         /* --- HERO SECTION --- */
         .hero {
-            position: relative;
-            height: 85vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            overflow: hidden;
-            border-bottom-left-radius: 60px;
-            border-bottom-right-radius: 60px;
-            margin-bottom: 50px;
-            background: #000;
+            position: relative; height: 85vh; display: flex; align-items: center;
+            justify-content: center; text-align: center; color: white; overflow: hidden;
+            border-bottom-left-radius: 60px; border-bottom-right-radius: 60px;
+            margin-bottom: 50px; background: #000;
         }
 
         .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
-            z-index: 1;
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            width: auto; height: auto; transform: translate(-50%, -50%);
+            object-fit: cover; z-index: 1;
         }
 
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.5));
-            z-index: 2;
-        }
+        .hero-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.3); z-index: 2; }
 
         .hero-card {
-            position: relative;
-            z-index: 3;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(15px) saturate(150%);
-            -webkit-backdrop-filter: blur(15px);
-            padding: 50px 30px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 650px;
-            margin: 0 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative; z-index: 3; background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(15px); padding: 50px 30px; border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2); max-width: 650px; margin: 0 20px;
         }
 
-        .hero-title {
-            font-size: clamp(2.2rem, 5vw, 3.8rem);
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-        }
+        .hero-title { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; margin-bottom: 15px; letter-spacing: -1.5px; }
 
         /* --- CONTENT GRID --- */
         .main-content { padding: 0 5% 80px; max-width: 1300px; margin: 0 auto; }
 
         .options-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            margin-top: -80px;
-            position: relative;
-            z-index: 5;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;
+            margin-top: -80px; position: relative; z-index: 5;
         }
 
         .option-card {
-            background: var(--bg-main);
-            border-radius: 35px;
-            padding: 12px;
-            box-shadow: var(--shadow-extrude);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-            cursor: pointer;
-            height: 380px;
-            position: relative;
+            background: var(--bg-main); border-radius: 35px; padding: 12px;
+            box-shadow: var(--shadow-extrude); transition: 0.4s; height: 380px; position: relative;
         }
 
-        .option-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 15px 15px 35px rgba(163,177,198,0.8);
-        }
-
-        .option-card:active {
-            box-shadow: var(--shadow-inset);
-            transform: translateY(-5px) scale(0.98);
-        }
-
-        .option-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 25px;
-        }
+        .option-card:hover { transform: translateY(-10px); }
+        .option-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 25px; }
 
         .option-overlay {
-            position: absolute;
-            inset: 12px;
+            position: absolute; inset: 12px;
             background: linear-gradient(transparent 40%, rgba(0,0,0,0.85));
-            border-radius: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
-            color: white;
+            border-radius: 25px; display: flex; flex-direction: column;
+            justify-content: flex-end; padding: 30px; color: white;
         }
 
         /* --- BENTO LOCATIONS --- */
-        .section-title { font-size: 28px; font-weight: 700; margin: 80px 0 40px; text-align: center; color: var(--text-main); }
+        .section-title { font-size: 28px; font-weight: 700; margin: 80px 0 40px; text-align: center; }
 
         .locations-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;
         }
 
         .location-card {
-            background: var(--bg-main);
-            padding: 15px;
-            border-radius: 30px;
-            box-shadow: var(--shadow-extrude);
-            transition: 0.3s ease;
+            background: var(--bg-main); padding: 25px; border-radius: 30px;
+            box-shadow: var(--shadow-extrude); transition: 0.3s ease; text-align: center;
         }
 
-        .location-card:hover { transform: scale(1.02); }
-
-        .location-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 20px;
-            margin-bottom: 15px;
-        }
-
-        .location-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 5px; }
-        .property-count { color: var(--text-light); font-size: 0.9rem; font-weight: 400; }
+        .location-icon { font-size: 3rem; color: var(--accent-red); margin-bottom: 20px; opacity: 0.8; }
+        .location-name { font-weight: 700; font-size: 1.2rem; margin-bottom: 10px; }
+        .location-text { color: var(--text-light); font-size: 0.95rem; line-height: 1.5; }
 
         /* --- FOOTER --- */
         .footer {
-            background: var(--bg-main);
-            box-shadow: inset 0 15px 30px rgba(163,177,198,0.4);
-            padding: 80px 5% 40px;
-            border-radius: 60px 60px 0 0;
+            background: var(--bg-main); box-shadow: inset 0 15px 30px rgba(163,177,198,0.4);
+            padding: 80px 5% 40px; border-radius: 60px 60px 0 0;
         }
 
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-        }
-
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
         .footer-column h3 { font-size: 15px; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1px; }
-        .footer-link { 
-            display: block; 
-            color: var(--text-light); 
-            text-decoration: none; 
-            margin-bottom: 12px; 
-            font-size: 14px;
-            transition: 0.2s;
-        }
+        .footer-link { display: block; color: var(--text-light); text-decoration: none; margin-bottom: 12px; font-size: 14px; transition: 0.2s; }
         .footer-link:hover { color: var(--accent-red); transform: translateX(5px); }
 
         @media (max-width: 768px) {
+            .header { width: 95%; padding: 10px 20px; }
+            .menu-toggle { display: flex; }
+            .nav-links {
+                display: none; flex-direction: column; position: absolute;
+                top: 75px; left: 0; width: 100%; background: var(--glass-bg);
+                backdrop-filter: blur(20px); padding: 40px 20px; border-radius: 30px;
+                gap: 25px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.4);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
             .options-grid { grid-template-columns: 1fr; margin-top: 20px; }
-            .header { padding: 10px 20px; width: 95%; }
-            .nav-links { display: none; }
             .hero { height: 70vh; border-radius: 0 0 40px 40px; }
         }
     </style>
@@ -249,158 +180,95 @@
 <body>
 
 <header class="header">
-    <a href="#" class="logo">Celeste Suites Abuja</a>
+    <a href="index.html" class="logo">Celeste Suites Abuja </a>
     
     <nav class="nav-links" id="nav-menu">
         <a href="index.html" class="nav-link">Home</a>
         <a href="room.html" class="nav-link">Rooms</a>
         <a href="about.html" class="nav-link">About</a>
+         
+         <a href="https://velvetmoon.ng/menu " class="nav-link">Menu   </a>
+         <a href="policy.html" class="nav-link">Policy </a>
         <a href="contact.html" class="nav-link">Contact</a>
     </nav>
 
     <div style="display: flex; gap: 18px; align-items: center;">
-        <i class="fas fa-search" style="opacity: 0.5; cursor: pointer;"></i>
-        
-        <div class="menu-toggle" onclick="toggleMenu()" style="width: 38px; height: 38px; background: #FF5A5F; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; cursor: pointer; box-shadow: 0 4px 10px rgba(255,90,95,0.3);">
+        <div class="menu-toggle" onclick="toggleMenu()">
             <i class="fas fa-bars" id="menu-icon" style="font-size: 14px;"></i>
         </div>
     </div>
 </header>
-<Style>/* Desktop: Hide the red menu button by default if you only want it on mobile */
-.menu-toggle {
-    display: none !important;
-}
 
-@media (max-width: 768px) {
-    /* Show the red button on mobile */
-    .menu-toggle {
-        display: flex !important;
-    }
-
-    /* Hide the links initially and position them as a dropdown */
-    .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 70px; /* Adjust based on header height */
-        left: 0;
-        width: 100%;
-        background: white;
-        padding: 20px;
-        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-    }
-
-    /* When the menu is open */
-    .nav-links.active {
-        display: flex;
-    }
-} </Style>
-<script>function toggleMenu() {
-    const nav = document.getElementById('nav-menu');
-    const icon = document.getElementById('menu-icon');
-    
-    nav.classList.toggle('active');
-
-    // Change icon from hamburger to 'X'
-    if (nav.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-times');
-    } else {
-        icon.classList.remove('fa-times');
-        icon.classList.add('fa-bars');
-    }
-} </script>
-
-    <section class="hero">
-        <video autoplay muted loop playsinline poster="k (2).jpg" class="hero-video">
-            <source src="bbg.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-card">
-            <h1 class="hero-title">Find Your Sanctuary</h1>
-            <p style="opacity: 0.9; font-weight: 300; font-size: 1.1rem;">Luxury Rooms, Studios & Suites- a boutique luxury retreat located in the Gwarinpa district of Abuja </p>
-        </div>
-    </section>
-
-    <main class="main-content">
-        <div class="options-grid">
-            <div class="option-card">
-                <img src="k (1).jpg" alt="Shortlets" loading="lazy">
-                <div class="option-overlay">
-                    <h2>Hampstead </h2>
-                    <p style="opacity: 0.8; font-size: 0.9rem;">1 bedroom, 2 bathroom</p>
-                </div>
-            </div>
-            <div class="option-card">
-                <img src="yt (2).jpg" alt="Rentals" loading="lazy">
-                <div class="option-overlay">
-                    <h2>Luxury Rentals</h2>
-                    <p style="opacity: 0.8; font-size: 0.9rem;">Long-term homes with curated elegance.</p>
-                </div>
-            </div>
-        </div>
-<section class="main-content">
-    <h2 class="section-title">The Celeste Standard</h2>
-    
-    <div class="locations-grid">
-        <div class="location-card">
-            <div style="height: 220px; background: linear-gradient(135deg, #d1d9e6, #ffffff); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
-                <i class="fas fa-gem" style="font-size: 3rem; color: var(--accent-red); opacity: 0.8;"></i>
-            </div>
-            <div class="location-info">
-                <div class="location-name">Exclusivity Redefined</div>
-                <div class="property-count" style="line-height: 1.4;">
-                    From our sophisticated Studios to our expansive Suites, every space at Celeste is a masterclass in architectural beauty and interior refinement.
-                </div>
-            </div>
-        </div>
-
-        <div class="location-card">
-            <div style="height: 220px; background: linear-gradient(135deg, #ffffff, #d1d9e6); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
-                <i class="fas fa-shield-check" style="font-size: 3rem; color: var(--accent-red); opacity: 0.8;"></i>
-            </div>
-            <div class="location-info">
-                <div class="location-name">A Pristine Sanctuary</div>
-                <div class="property-count" style="line-height: 1.4;">
-                    Experience peace of mind with 24/7 power, biometric security, and a strictly <b>non-smoking in the rooms </b> policy to ensure a fresh, premium environment.
-                </div>
-            </div>
-        </div>
-
-        <div class="location-card">
-            <div style="height: 220px; background: linear-gradient(135deg, #e0e5ec, #adb5bd); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
-                <i class="fas fa-map-location-dot" style="font-size: 3rem; color: var(--accent-red); opacity: 0.8;"></i>
-            </div>
-            <div class="location-info">
-                <div class="location-name">Heart of Gwarinpa</div>
-                <div class="property-count" style="line-height: 1.4;">
-                    Nestled in Abuja's most vibrant hub, we offer the perfect blend of neighborhood charm and easy access to the capital's central business districts.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div style="margin-top: 50px; padding: 40px; border-radius: 35px; box-shadow: var(--shadow-inset); text-align: center;">
-        <p style="font-size: 1.2rem; font-weight: 300; color: var(--text-main); max-width: 800px; margin: 0 auto; line-height: 1.6;">
-            "At <b>Celeste Suites</b>, our mission is to redefine urban living in Abuja by bridging the gap between <span style="color: var(--accent-red); font-weight: 500;">luxury hospitality</span> and the timeless comfort of <span style="color: var(--accent-red); font-weight: 500;">home</span>."
-        </p>
-        <div style="margin-top: 25px; font-size: 0.9rem; color: var(--text-muted);">
-            <i class="fas fa-map-marker-alt"></i> House 15, 14th Road, off 2nd Avenue, Gwarinpa, Abuja<br>
-            <i class="fas fa-phone"></i> 0901 923 8653
-        </div>
+<section class="hero">
+    <video autoplay muted loop playsinline poster="k (2).jpg" class="hero-video">
+        <source src="bbg.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-card">
+        <h1 class="hero-title"> Peace & Comfort  </h1>
+        <p style="opacity: 0.9; font-weight: 300; font-size: 1.1rem;">Boutique luxury living in the heart of Gwarinpa, Abuja. Named after London's iconic districts, designed for your ultimate comfort.</p>
     </div>
 </section>
-      
-    </main>
 
-   <footer class="footer">
+<main class="main-content">
+    <div class="options-grid">
+        <div class="option-card" onclick="location.href='room.html'">
+            <img src="k (1).jpg" alt="Hampstead Suite" loading="lazy">
+            <div class="option-overlay">
+                <h2>Hampstead Suite</h2>
+                <p style="opacity: 0.8; font-size: 0.9rem;">1 Bedroom • Private Sitting Room • ₦100,000</p>
+            </div>
+        </div>
+        <div class="option-card" onclick="location.href='room.html'">
+            <img src="yt (2).jpg" alt="Executive Singles" loading="lazy">
+            <div class="option-overlay">
+                <h2>The Executive Series</h2>
+                <p style="opacity: 0.8; font-size: 0.9rem;">Mayfair, Soho & Kensington Rooms starting from ₦50,000</p>
+            </div>
+        </div>
+    </div>
+
+    <section>
+        <h2 class="section-title">The Celeste Standard</h2>
+        <div class="locations-grid">
+            <div class="location-card">
+                <i class="fas fa-hat-chef location-icon"></i>
+                <div class="location-name">Gourmet Living</div>
+                <p class="location-text">Every suite comes with access to our Private Chef and curated Bar service for a true boutique experience.</p>
+            </div>
+
+            <div class="location-card">
+                <i class="fas fa-shield-halved location-icon"></i>
+                <div class="location-name">Secured Sanctuary</div>
+                <p class="location-text">Enjoy 24/7 power, high-speed Wi-Fi, and top-tier security within our strictly non-smoking indoor environment.</p>
+            </div>
+
+            <div class="location-card">
+                <i class="fas fa-bolt location-icon"></i>
+                <div class="location-name">Pure Convenience</div>
+                <p class="location-text">From Netflix & DSTV to dedicated parking and laundry services—we have thought of everything.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 50px; padding: 40px; border-radius: 35px; box-shadow: var(--shadow-inset); text-align: center;">
+            <p style="font-size: 1.2rem; font-weight: 300; color: var(--text-main); max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                "At <b>Celeste Suites</b>, our mission is to redefine urban living in Abuja by bridging the gap between <span style="color: var(--accent-red); font-weight: 500;">luxury hospitality</span> and the timeless comfort of <span style="color: var(--accent-red); font-weight: 500;">home</span>."
+            </p>
+            <div style="margin-top: 25px; font-size: 0.9rem; color: var(--text-light);">
+                <i class="fas fa-map-marker-alt"></i> House 15, 14th Road, off 2nd Avenue, Gwarinpa, Abuja<br>
+                <i class="fas fa-phone"></i> 0901 923 8653
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
     <div class="footer-grid">
         <div class="footer-column">
             <h3>Celeste Suites</h3>
-            <p style="font-size: 14px; line-height: 1.6; opacity: 0.8; margin-top: 10px;">
-                House 15, 14th Road,<br>
-                Off 2nd Avenue, Gwarinpa,<br>
-                Abuja, Nigeria.
+            <p style="font-size: 14px; line-height: 1.6; opacity: 0.8;">
+                House 15, 14th Road, Off 2nd Avenue,<br>
+                Gwarinpa, Abuja, Nigeria.
             </p>
             <p style="font-size: 14px; margin-top: 10px; font-weight: 500;">
                 <i class="fas fa-phone-alt" style="margin-right: 8px; color: var(--accent-red);"></i> 0901 923 8653
@@ -409,9 +277,9 @@
 
         <div class="footer-column">
             <h3>The Experience</h3>
-            <a href="room.html" class="footer-link">Luxury Rooms</a>
-            <a href="room.html" class="footer-link">Studio Suites</a>
-            <a href="room.html" class="footer-link">Executive Suites</a>
+            <a href="room.html" class="footer-link">Soho & Mayfair</a>
+            <a href="room.html" class="footer-link">Kensington & Knightsbridge</a>
+            <a href="room.html" class="footer-link">Hampstead (1BR)</a>
             <a href="room.html" class="footer-link">Amenities</a>
         </div>
 
@@ -419,27 +287,33 @@
             <h3>Guest Services</h3>
             <a href="policy.html" class="footer-link">Check-in Policy</a>
             <a href="policy.html" class="footer-link">Non-Smoking Policy</a>
-            <a href="policy.html" class="footer-link">Privacy & Security</a>
-            <a href="policy.html" class="footer-link">FAQs</a>
+            <a href="policy.html" class="footer-link">Refunds</a>
+            <a href="policy.html" class="footer-link">House Rules</a>
         </div>
 
         <div class="footer-column">
             <h3>Connect With Us</h3>
             <div style="display: flex; gap: 20px; font-size: 20px; margin-top: 10px;">
-                <a href=" https://www.instagram.com/celeste_suites/" class="footer-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                <a href=" https://www.instagram.com/celeste_suites/" class="footer-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                <a href="https://www.instagram.com/celeste_suites/ " class="footer-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/celeste_suites/" class="footer-link"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/2349019238653" class="footer-link"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p style="font-size: 12px; margin-top: 20px; opacity: 0.7; font-style: italic;">
-                Where Exclusivity Meets Timeless Comfort.
-            </p>
+            <p style="font-size: 12px; margin-top: 20px; opacity: 0.7; font-style: italic;">Where Exclusivity Meets Timeless Comfort.</p>
         </div>
     </div>
 
-    <div style="margin-top: 60px; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 30px; font-size: 13px; opacity: 0.6; letter-spacing: 1px;">
+    <div style="margin-top: 60px; text-align: center; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 30px; font-size: 11px; opacity: 0.6; letter-spacing: 1px;">
         © 2026 CELESTE SUITES & APARTMENTS. DEFINED BY ELEGANCE.
     </div>
-</footer> 
+</footer>
+
+<script>
+    function toggleMenu() {
+        const nav = document.getElementById('nav-menu');
+        const icon = document.getElementById('menu-icon');
+        nav.classList.toggle('active');
+        icon.className = nav.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+    }
+</script>
 
 </body>
 </html>
