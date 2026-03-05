@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Policies | Celeste Suites Abuja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #E0E5EC;
+            --text-main: #2C3E50;
+            --text-light: #627485;
+            --accent-red: #FF5A5F;
+            --shadow-extrude: 12px 12px 24px rgba(163,177,198,0.7), -12px -12px 24px rgba(255,255,255,0.9);
+            --shadow-inset: inset 6px 6px 12px rgba(163,177,198,0.5), inset -6px -6px 12px rgba(255,255,255,0.8);
+            --glass-bg: rgba(224, 229, 236, 0.7);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        .header {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1100px; background: var(--glass-bg);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 999px;
+            padding: 10px 30px; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); z-index: 1000;
+        }
+
+        .logo { font-size: 20px; font-weight: 700; color: var(--text-main); text-decoration: none; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 14px; transition: 0.3s; opacity: 0.8; }
+        .nav-link:hover { color: var(--accent-red); opacity: 1; }
+
+        /* --- CONTENT --- */
+        .container {
+            max-width: 900px;
+            margin: 150px auto 100px;
+            padding: 0 5%;
+        }
+
+        .policy-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .policy-card {
+            background: var(--bg-main);
+            padding: 40px;
+            border-radius: 40px;
+            box-shadow: var(--shadow-extrude);
+            margin-bottom: 40px;
+        }
+
+        .policy-section {
+            margin-bottom: 30px;
+        }
+
+        .policy-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .policy-section p, .policy-section ul {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            padding-left: 40px;
+        }
+
+        .policy-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: var(--bg-main);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-inset);
+            border-left: 4px solid var(--accent-red);
+            margin-top: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .policy-card { padding: 25px; }
+            .policy-section p, .policy-section ul { padding-left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">Celeste Suites</a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="room.html" class="nav-link">Rooms</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <div style="width: 38px; height: 38px; background: var(--accent-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+            <i class="fas fa-gavel" style="font-size: 14px;"></i>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="policy-header">
+            <h1>Stay Guidelines</h1>
+            <p>Ensuring comfort, safety, and exclusivity for all our guests.</p>
+        </div>
+
+        <div class="policy-card">
+            <div class="policy-section">
+                <h3><i class="fas fa-nosmoking"></i> Non-Smoking Policy</h3>
+                <p>Celeste Suites maintains a strictly 100% smoke-free environment. This includes all guest rooms, balconies, and common indoor areas.</p>
+                <div class="highlight-box">
+                    A deep cleaning fee of <b>₦50,000</b> will be charged to any guest who violates this policy to restore the room to our premium standards.
+                </div>
+            </div>
+
+            <hr style="opacity: 0.1; margin: 30px 0;">
+
+            <div class="policy-section">
+                <h3><i class="fas fa-clock"></i> Check-in & Check-out</h3>
+                <ul>
+                    <li><b>Check-in:</b> From 2:00 PM</li>
+                    <li><b>Check-out:</b> By 12:00 PM (Noon)</li>
+                    <li>Early check-in or late check-out is subject to availability and may incur additional charges.</li>
+                </ul>
+            </div>
+
+            <hr style="opacity: 0.1; margin: 30px 0;">
+
+            <div class="policy-section">
+                <h3><i class="fas fa-user-shield"></i> Security & Visitors</h3>
+                <p>To maintain the exclusivity of our Gwarinpa retreat:</p>
+                <ul>
+                    <li>All guests must provide a valid government-issued ID upon arrival.</li>
+                    <li>Visitors are permitted in common areas but must be registered at the front desk before entering guest suites.</li>
+                    <li>Quiet hours are observed from 10:00 PM to 7:00 AM.</li>
+                </ul>
+            </div>
+
+            <hr style="opacity: 0.1; margin: 30px 0;">
+
+            <div class="policy-section">
+                <h3><i class="fas fa-calendar-times"></i> Cancellation & Refunds</h3>
+                <p>We understand plans change. Our standard policy is:</p>
+                <ul>
+                    <li>Full refund for cancellations made 48 hours prior to check-in.</li>
+                    <li>Cancellations within 24 hours will incur a one-night stay charge.</li>
+                </ul>
+            </div>
+        </div>
+
+        <p style="text-align: center; color: var(--text-light); font-size: 0.8rem;">
+            *By booking a stay at Celeste Suites, you agree to abide by the house rules mentioned above.
+        </p>
+    </main>
+
+    <footer class="footer" style="padding: 40px 5%; text-align: center;">
+        <p style="font-size: 13px; opacity: 0.6;">© 2026 CELESTE SUITES & APARTMENTS. DEFINED BY ELEGANCE.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Suites | Celeste Suites Abuja</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-main: #E0E5EC;
+            --text-main: #2C3E50;
+            --text-light: #627485;
+            --accent-red: #FF5A5F;
+            --shadow-extrude: 12px 12px 24px rgba(163,177,198,0.7), -12px -12px 24px rgba(255,255,255,0.9);
+            --shadow-inset: inset 6px 6px 12px rgba(163,177,198,0.5), inset -6px -6px 12px rgba(255,255,255,0.8);
+            --glass-bg: rgba(224, 229, 236, 0.7);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+        }
+
+        /* --- NAVIGATION --- */
+        .header {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1100px; background: var(--glass-bg);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 999px;
+            padding: 10px 30px; display: flex; justify-content: space-between;
+            align-items: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); z-index: 1000;
+        }
+
+        .logo { font-size: 20px; font-weight: 700; color: var(--text-main); text-decoration: none; }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 500; font-size: 14px; transition: 0.3s; opacity: 0.8; }
+        .nav-link:hover { color: var(--accent-red); opacity: 1; }
+
+        /* --- ROOMS CONTENT --- */
+        .container {
+            max-width: 1200px;
+            margin: 150px auto 100px;
+            padding: 0 5%;
+        }
+
+        .rooms-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .rooms-header h1 { font-size: 2.5rem; letter-spacing: -1px; margin-bottom: 10px; }
+        .rooms-header p { color: var(--text-light); }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .room-card {
+            background: var(--bg-main);
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: var(--shadow-extrude);
+            transition: 0.3s ease;
+        }
+
+        .room-image {
+            width: 100%;
+            height: 280px;
+            border-radius: 30px;
+            object-fit: cover;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .room-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            background: white;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-red);
+            margin-bottom: 15px;
+            box-shadow: var(--shadow-inset);
+        }
+
+        .room-info h2 { margin-bottom: 10px; font-size: 1.5rem; }
+        .room-features {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .room-features span { display: flex; align-items: center; gap: 5px; }
+
+        .book-btn {
+            display: block;
+            text-align: center;
+            width: 100%;
+            padding: 15px;
+            background: var(--bg-main);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 20px;
+            box-shadow: var(--shadow-extrude);
+            transition: 0.3s;
+        }
+
+        .book-btn:hover {
+            box-shadow: var(--shadow-inset);
+            color: var(--accent-red);
+        }
+
+        @media (max-width: 768px) {
+            .rooms-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="logo">Celeste Suites</a>
+        <nav class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="room.html" class="nav-link" style="color: var(--accent-red); opacity: 1;">Rooms</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </nav>
+        <div style="width: 38px; height: 38px; background: var(--accent-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white;">
+            <i class="fas fa-bed" style="font-size: 14px;"></i>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="rooms-header">
+            <h1>Our Sanctuary Collection</h1>
+            <p>Thoughtfully designed spaces for rest, work, and rejuvenation.</p>
+        </div>
+
+        <div class="rooms-grid">
+            <div class="room-card">
+                <img src="k (1).jpg" alt="Hampstead Suite" class="room-image">
+                <span class="room-tag">MOST POPULAR</span>
+                <div class="room-info">
+                    <h2>Hampstead Suite</h2>
+                    <div class="room-features">
+                        <span><i class="fas fa-bed"></i> 1 Bed</span>
+                        <span><i class="fas fa-bath"></i> 2 Baths</span>
+                        <span><i class="fas fa-nosmoking"></i> Non-Smoking</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 25px;">
+                        A masterclass in modern living featuring a spacious layout, premium bedding, and a separate visitor's restroom for maximum privacy.
+                    </p>
+                    <a href="https://wa.me/2349019238653" class="book-btn">Check Availability</a>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <img src="yt (2).jpg" alt="Studio Suite" class="room-image">
+                <span class="room-tag">EXECUTIVE</span>
+                <div class="room-info">
+                    <h2>Premium Studio</h2>
+                    <div class="room-features">
+                        <span><i class="fas fa-bed"></i> Studio</span>
+                        <span><i class="fas fa-wifi"></i> Fast Wi-Fi</span>
+                        <span><i class="fas fa-nosmoking"></i> Non-Smoking</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 25px;">
+                        Perfect for the solo professional or couple. Features an open-plan design with a dedicated workspace and high-end kitchenette.
+                    </p>
+                    <a href="https://wa.me/2349019238653" class="book-btn">Check Availability</a>
+                </div>
+            </div>
+
+            <div class="room-card">
+                <div style="height: 280px; background: linear-gradient(135deg, #d1d9e6, #ffffff); border-radius: 30px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px;">
+                     <i class="fas fa-hotel" style="font-size: 4rem; color: var(--accent-red); opacity: 0.3;"></i>
+                </div>
+                <span class="room-tag">BOUTIQUE</span>
+                <div class="room-info">
+                    <h2>Classic Room</h2>
+                    <div class="room-features">
+                        <span><i class="fas fa-bed"></i> King Bed</span>
+                        <span><i class="fas fa-tv"></i> Smart TV</span>
+                        <span><i class="fas fa-nosmoking"></i> Non-Smoking</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 25px;">
+                        Our essential luxury experience. Includes all standard Celeste amenities with a focus on a peaceful night's sleep in Gwarinpa.
+                    </p>
+                    <a href="https://wa.me/2349019238653" class="book-btn">Check Availability</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer" style="padding: 40px 5%; text-align: center; border-top: 1px solid rgba(0,0,0,0.05);">
+        <p style="font-size: 13px; opacity: 0.6;">© 2026 CELESTE SUITES & APARTMENTS. GWARINPA, ABUJA.</p>
+    </footer>
+
+</body>
+</html>
