@@ -11,10 +11,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box; --bg-main: #E0E5EC;
+     :root {
+            --bg-main: #E0E5EC;
             --text-main: #2C3E50;
             --text-light: #627485;
             --accent-red: #FF5A5F;
@@ -22,12 +20,16 @@
             --shadow-extrude: 12px 12px 24px rgba(163,177,198,0.7), -12px -12px 24px rgba(255,255,255,0.9);
             --shadow-inset: inset 6px 6px 12px rgba(163,177,198,0.5), inset -6px -6px 12px rgba(255,255,255,0.8);
             --glass-bg: rgba(224, 229, 236, 0.85);
-      --shadow-soft: 8px 8px 24px rgba(160, 175, 195, 0.6), -8px -8px 24px rgba(255, 255, 255, 0.9);
-      --shadow-inset: inset 4px 4px 12px rgba(160, 175, 195, 0.5), inset -4px -4px 12px rgba(255, 255, 255, 0.8);
-      --glass-bg: rgba(224, 229, 236, 0.78);
-      --radius-card: 42px;
-      --radius-pill: 60px;
-    }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+        }
 
     @font-face {
       font-family: 'Metropolis Bold';
@@ -512,20 +514,7 @@
   </button>
 </header>
 
-<!-- ======= PAGE TITLE ======= -->
-<div class="page-header" style="display:flex;align-items:center;gap:1.25rem;padding:2rem;border-radius:12px;background:linear-gradient(135deg,#fff 0%,#fff0 40%),url('https://i.pinimg.com/736x/70/7b/c4/707bc4f79ca84184c607f4d767ec1378.jpg') right/420px no-repeat;border:1px solid rgba(0,0,0,0.06);box-shadow:0 8px 30px rgba(10,10,20,0.06);">
-  <div style="flex:1;min-width:260px;">
-    <h1 style="margin:0 0 .35rem 0;font-size:1.9rem;line-height:1.05;color:#1f2937;font-weight:700;">
-      <i class="fas fa-utensil-spoon" style="color:#f97316;margin-right:.4rem"></i>
-      In‑Room Dining
-      <i class="fas fa-mug-hot" style="color:#ef4444;margin-left:.6rem"></i>
-    </h1>
-    <p style="margin:0 0 1rem 0;color:#475569;max-width:56ch;">Indulge in a curated selection of comfort food, grilled specialties &amp; classic Nigerian dishes — thoughtfully prepared and delivered to your room.</p>
-    <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
-      <a href="#menu" style="background:#111827;color:#fff;padding:.6rem .9rem;border-radius:10px;text-decoration:none;font-weight:600;box-shadow:0 6px 18px rgba(17,24,39,0.12);">View Menu</a>
-      <a href="#order" style="background:transparent;color:#0f172a;padding:.6rem .9rem;border-radius:10px;border:1px solid rgba(15,23,42,0.08);text-decoration:none;font-weight:600;">Place Order</a>
-    </div>
-  </div>
+
   
 </div>
 
