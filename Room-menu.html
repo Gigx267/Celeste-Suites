@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celeste Suites · In‑Room Dining</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #E0E5EC;
+      font-family: 'Outfit', sans-serif;
+      color: #2C3E50;
+      line-height: 1.5;
+      padding: 0 0 40px;
+    }
+
+    /* ----- shared neumorphic tokens ----- */
+    :root {
+      --bg-main: #E0E5EC;
+      --text-main: #2C3E50;
+      --text-light: #627485;
+      --accent-red: #FF5A5F;
+      --white: #ffffff;
+      --shadow-extrude: 12px 12px 24px rgba(163,177,198,0.7), -12px -12px 24px rgba(255,255,255,0.9);
+      --shadow-inset: inset 6px 6px 12px rgba(163,177,198,0.5), inset -6px -6px 12px rgba(255,255,255,0.8);
+      --glass-bg: rgba(224, 229, 236, 0.88);
+    }
+
+    /* ----- navigation (mirror home) ----- */
+    .header {
+      position: sticky;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 1100px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      border-radius: 999px;
+      padding: 10px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-main);
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 500;
+      font-size: 14px;
+      transition: 0.3s;
+      opacity: 0.8;
+    }
+    .nav-link:hover {
+      color: var(--accent-red);
+      opacity: 1;
+    }
+    .menu-toggle {
+      display: none;
+      width: 38px;
+      height: 38px;
+      background: var(--accent-red);
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(255,90,95,0.3);
+    }
+
+    /* ----- page title ----- */
+    .page-header {
+      max-width: 1300px;
+      margin: 0 auto 30px;
+      padding: 0 5%;
+    }
+    .page-header h1 {
+      font-size: 2.4rem;
+      font-weight: 600;
+      letter-spacing: -1px;
+    }
+    .page-header p {
+      color: var(--text-light);
+      font-weight: 300;
+      font-size: 1.1rem;
+      margin-top: 6px;
+    }
+
+    /* ----- menu grid (bento / cards) ----- */
+    .menu-grid {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 5% 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 30px;
+    }
+
+    .menu-card {
+      background: var(--bg-main);
+      border-radius: 35px;
+      padding: 28px 25px 25px;
+      box-shadow: var(--shadow-extrude);
+      transition: 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .menu-card .category-icon {
+      font-size: 2rem;
+      color: var(--accent-red);
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+
+    .menu-card h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      border-bottom: 2px solid rgba(255,90,95,0.2);
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed rgba(44, 62, 80, 0.06);
+      font-size: 0.98rem;
+    }
+    .menu-item:last-of-type {
+      border-bottom: 0;
+    }
+    .menu-item .item-name {
+      font-weight: 400;
+      color: var(--text-main);
+    }
+    .menu-item .item-price {
+      font-weight: 600;
+      color: var(--accent-red);
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+      margin-left: 20px;
+    }
+
+    .menu-note {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      background: rgba(255, 255, 255, 0.3);
+      padding: 16px 18px;
+      border-radius: 30px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(4px);
+      box-shadow: var(--shadow-inset);
+      font-weight: 400;
+    }
+    .menu-note i {
+      color: var(--accent-red);
+      margin-right: 10px;
+    }
+
+    /* ----- footer (exactly as home) ----- */
+    .footer {
+      background: var(--bg-main);
+      box-shadow: inset 0 15px 30px rgba(163,177,198,0.4);
+      padding: 80px 5% 40px;
+      border-radius: 60px 60px 0 0;
+      margin-top: 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .footer-column h3 {
+      font-size: 15px;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .footer-link {
+      display: block;
+      color: var(--text-light);
+      text-decoration: none;
+      margin-bottom: 12px;
+      font-size: 14px;
+      transition: 0.2s;
+    }
+    .footer-link:hover {
+      color: var(--accent-red);
+      transform: translateX(5px);
+    }
+    .footer-bottom {
+      max-width: 1300px;
+      margin: 60px auto 0;
+      text-align: center;
+      border-top: 1px solid rgba(0,0,0,0.05);
+      padding-top: 30px;
+      font-size: 11px;
+      opacity: 0.6;
+      letter-spacing: 1px;
+    }
+
+    /* ----- responsive ----- */
+    @media (max-width: 768px) {
+      .header {
+        width: 95%;
+        padding: 10px 20px;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        padding: 40px 20px;
+        border-radius: 30px;
+        gap: 25px;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="header">
+  <a href="index.html" class="logo">Celeste Suites Abuja</a>
+  <nav class="nav-links" id="nav-menu">
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="room.html" class="nav-link">Rooms</a>
+    <a href="about.html" class="nav-link">About</a>
+    <a href="https://velvetmoon.ng/menu" target="_blank" class="nav-link">Menu</a>
+    <a href="policy.html" class="nav-link">Policy</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+  <div style="display: flex; gap: 18px; align-items: center;">
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <i class="fas fa-bars" id="menu-icon" style="font-size: 14px;"></i>
+    </div>
+  </div>
+</header>
+
+<!-- ========== PAGE TITLE ========== -->
+<div class="page-header">
+  <h1>🍽️ In‑Room Dining</h1>
+  <p>Indulge in a curated selection of comfort food, grilled specialties & classic Nigerian dishes.</p>
+</div>
+
+<!-- ========== MENU GRID ========== -->
+<div class="menu-grid">
+
+  <!-- BREAKFAST -->
+  <div class="menu-card">
+    <div class="category-icon"><i class="fas fa-sun"></i></div>
+    <h2>Breakfast <span style="font-size: 0.8rem; font-weight: 400; opacity: 0.7;">served all day</span></h2>
+    <div class="menu-item"><span class="item-name">Noodles & Eggs</span><span class="item-price">₦7,000</span></div>
+    <div class="menu-item"><span class="item-name">Stir‑Fried Shrimp Noodles</span><span class="item-price">₦14,500</span></div>
+    <div class="menu-item"><span class="item-name">Chicken & Noodles</span><span class="item-price">₦12,000</span></div>
+    <div class="menu-item"><span class="item-name">Pancakes & Sausage</span><span class="item-price">₦8,000</span></div>
+    <div class="menu-item"><span class="item-name">Full English Breakfast</span><span class="item-price">₦15,000</span></div>
+    <div class="menu-item"><span class="item-name">Akara & Pap or Custard</span><span class="item-price">₦7,500</span></div>
+    <div class="menu-item"><span class="item-name">Boiled Yam & Egg Sauce</span><span class="item-price">₦8,000</span></div>
+  </div>
+
+  <!-- RICE & PASTA -->
+  <div class="menu-card">
+    <div class="category-icon"><i class="fas fa-utensils"></i></div>
+    <h2>Rice & Pasta</h2>
+    <div class="menu-item"><span class="item-name">White Rice & Stew</span><span class="item-price">₦5,000</span></div>
+    <div class="menu-item"><span class="item-name">Jollof Rice</span><span class="item-price">₦4,000</span></div>
+    <div class="menu-item"><span class="item-name">Nigerian Fried Rice</span><span class="item-price">₦4,500</span></div>
+    <div class="menu-item"><span class="item-name">Chinese Fried Rice</span><span class="item-price">₦6,000</span></div>
+    <div class="menu-item"><span class="item-name">Jollof Spaghetti</span><span class="item-price">₦4,000</span></div>
+    <div class="menu-item"><span class="item-name">Spaghetti Bolognese</span><span class="item-price">₦10,000</span></div>
+    <div class="menu-item"><span class="item-name">Creamy Chicken Pasta</span><span class="item-price">₦14,500</span></div>
+  </div>
+
+  <!-- GRILLS & PEPPER SOUP / MEAT -->
+  <div class="menu-card">
+    <div class="category-icon"><i class="fas fa-fire"></i></div>
+    <h2>Grills · Pepper Soup & Meat</h2>
+    <div class="menu-item"><span class="item-name">Catfish Pepper Soup</span><span class="item-price">₦13,000</span></div>
+    <div class="menu-item"><span class="item-name">Grilled Catfish</span><span class="item-price">₦16,000</span></div>
+    <div class="menu-item"><span class="item-name">Grilled Croaker Fish</span><span class="item-price">₦17,500</span></div>
+    <div class="menu-item"><span class="item-name">Grilled Chicken</span><span class="item-price">₦14,000</span></div>
+    <div class="menu-item"><span class="item-name">Chicken Pepper Soup</span><span class="item-price">₦12,000</span></div>
+    <div class="menu-item"><span class="item-name">Curry Goat</span><span class="item-price">₦15,000</span></div>
+    <div class="menu-item"><span class="item-name">Peppered Beef</span><span class="item-price">₦8,000</span></div>
+    <div class="menu-item"><span class="item-name">Peppered Goat Meat</span><span class="item-price">₦8,500</span></div>
+    <div class="menu-item"><span class="item-name">Peppered Chicken</span><span class="item-price">₦7,000</span></div>
+    <div class="menu-item"><span class="item-name">Turkey Wing</span><span class="item-price">₦8,500</span></div>
+    <div class="menu-item"><span class="item-name">Peppered Snail</span><span class="item-price">₦19,500</span></div>
+    <div class="menu-item"><span class="item-name">Peppered Gizzard</span><span class="item-price">₦9,500</span></div>
+  </div>
+
+  <!-- SWALLOW -->
+  <div class="menu-card">
+    <div class="category-icon"><i class="fas fa-bowl-food"></i></div>
+    <h2>Swallow</h2>
+    <div class="menu-item"><span class="item-name">Poundo Yam</span><span class="item-price">₦3,000</span></div>
+    <div class="menu-item"><span class="item-name">Semovita</span><span class="item-price">₦2,500</span></div>
+    <div class="menu-item"><span class="item-name">Eba</span><span class="item-price">₦2,000</span></div>
+    <div class="menu-item"><span class="item-name">Wheat</span><span class="item-price">₦2,500</span></div>
+  </div>
+
+  <!-- SOUPS -->
+  <div class="menu-card">
+    <div class="category-icon"><i class="fas fa-mug-saucer"></i></div>
+    <h2>Soups</h2>
+    <div class="menu-item"><span class="item-name">Egusi Soup</span><span class="item-price">₦8,500</span></div>
+    <div class="menu-item"><span class="item-name">Edikang Ikong (Vegetable)</span><span class="item-price">₦10,000</span></div>
+    <div class="menu-item"><span class="item-name">Ogbono Soup</span><span class="item-price">₦9,500</span></div>
+    <div class="menu-item"><span class="item-name">Okra Soup</span><span class="item-price">₦8,000</span></div>
+    <div class="menu-item"><span class="item-name">White Soup</span><span class="item-price">₦10,000</span></div>
+    <div class="menu-item"><span class="item-name">Bitter Leaf Soup</span><span class="item-price">₦10,000</span></div>
+  </div>
+
+  <!-- ROOM SERVICE NOTE (spans full width on large screens) -->
+  <div class="menu-card" style="grid-column: 1 / -1; background: var(--bg-main); box-shadow: var(--shadow-inset); border: 1px solid rgba(255,255,255,0.5);">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;">
+      <div>
+        <span style="font-size: 2rem; margin-right: 12px;">📞</span>
+        <span style="font-weight: 600; font-size: 1.3rem;">Room Service</span>
+        <span style="display: inline-block; margin-left: 16px; font-weight: 300; color: var(--text-light);">dial <strong style="color: var(--accent-red);">802</strong> on the intercom</span>
+      </div>
+      <div style="font-size: 0.95rem; color: var(--text-light); background: rgba(255,255,255,0.4); padding: 8px 22px; border-radius: 50px;">
+        <i class="fas fa-clock" style="margin-right: 8px;"></i> 6:00 AM – 10:00 PM
+      </div>
+    </div>
+    <div style="margin-top: 20px; border-top: 1px solid rgba(44,62,80,0.08); padding-top: 18px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; font-size: 0.95rem; color: var(--text-main);">
+      <span><i class="fas fa-utensils" style="color: var(--accent-red); margin-right: 8px;"></i>Comfort · Luxury · Hospitality</span>
+      <span><i class="fas fa-star" style="color: var(--accent-red); margin-right: 8px;"></i>Celeste Suites</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========== FOOTER (mirrored from home) ========== -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-column">
+      <h3>Celeste Suites</h3>
+      <p style="font-size: 14px; line-height: 1.6; opacity: 0.8;">
+        House 15, 14th Road, Off 2nd Avenue,<br>
+        Gwarinpa, Abuja, Nigeria.
+      </p>
+      <p style="font-size: 14px; margin-top: 10px; font-weight: 500;">
+        <i class="fas fa-phone-alt" style="margin-right: 8px; color: var(--accent-red);"></i> 0901 923 8653
+      </p>
+    </div>
+    <div class="footer-column">
+      <h3>The Experience</h3>
+      <a href="room.html" class="footer-link">Soho & Mayfair</a>
+      <a href="room.html" class="footer-link">Kensington & Knightsbridge</a>
+      <a href="room.html" class="footer-link">Hampstead (1BR)</a>
+      <a href="room.html" class="footer-link">Amenities</a>
+    </div>
+    <div class="footer-column">
+      <h3>Guest Services</h3>
+      <a href="policy.html" class="footer-link">Check-in Policy</a>
+      <a href="policy.html" class="footer-link">Non-Smoking Policy</a>
+      <a href="policy.html" class="footer-link">Refunds</a>
+      <a href="policy.html" class="footer-link">House Rules</a>
+    </div>
+    <div class="footer-column">
+      <h3>Connect With Us</h3>
+      <div style="display: flex; gap: 20px; font-size: 20px; margin-top: 10px;">
+        <a href="https://www.instagram.com/celeste_suites/" class="footer-link"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/2349019238653" class="footer-link"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p style="font-size: 12px; margin-top: 20px; opacity: 0.7; font-style: italic;">Where Exclusivity Meets Timeless Comfort.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2026 CELESTE SUITES & APARTMENTS. DEFINED BY ELEGANCE.
+  </div>
+</footer>
+
+<!-- ========== MOBILE MENU TOGGLE ========== -->
+<script>
+  function toggleMenu() {
+    const nav = document.getElementById('nav-menu');
+    const icon = document.getElementById('menu-icon');
+    nav.classList.toggle('active');
+    icon.className = nav.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+  }
+</script>
+
+</body>
+</html>
